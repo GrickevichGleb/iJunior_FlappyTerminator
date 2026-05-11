@@ -15,6 +15,11 @@ public class EnemiesSpawner : Spawner
         StartCoroutine(SpawnEnemiesCoroutine());
     }
 
+    public void ResetSpawner()
+    {
+        _pool.Clear();
+    }
+
     protected override void ActionOnGet(Spawnable spawnable)
     {
         base.ActionOnGet(spawnable);

@@ -6,7 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(CollisionHandler))]
 public class Enemy : Spawnable
 {
+    [SerializeField] private int _scoreValue = 5;
+    
     private CollisionHandler _collisionHandler;
+
+    public event Action<int> Destroyed;
 
     private void Awake()
     {
@@ -27,6 +31,14 @@ public class Enemy : Spawnable
     {
         if (interactable is Despawner)
         {
+            Release();
+            return;
+        }
+
+        if (interactable is Projectile)
+        {
+            Debug.Log("Shot down");
+            Destroyed?.Invoke(_scoreValue);
             Release();
         }
     }

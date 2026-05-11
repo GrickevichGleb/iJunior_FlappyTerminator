@@ -19,6 +19,8 @@ public class PlayerMover : MonoBehaviour
     private Quaternion _minRotation;
 
     private Player _player;
+
+    private bool _isJumping = false;
     
     private void Awake()
     {
@@ -44,15 +46,26 @@ public class PlayerMover : MonoBehaviour
         _player.HitObstacle -= OnHitObstacle;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            _rigidbody.velocity = new Vector2(_speed, _tapForce);
-            transform.rotation = _maxRotation;
-        }
+        if(_isJumping)
+            Jump();
         
         transform.rotation = Quaternion.Lerp(transform.rotation, _minRotation, _rotationSpeed * Time.deltaTime);
+    }
+
+    public void TryJump()
+    {
+        if (!_isJumping)
+            _isJumping = true;
+    }
+
+    private void Jump()
+    {
+        _rigidbody.velocity = new Vector2(_speed, _tapForce);
+        transform.rotation = _maxRotation;
+        
+        _isJumping = false;
     }
     
     private void OnHitObstacle()
