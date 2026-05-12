@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     private PlayerMover _playerMover;
     private ProjectileSpawner _projectileSpawner;
 
+    private ScoreCounter _scoreCounter;
+
     public event Action HitObstacle;
     
     private void Awake()
@@ -22,6 +24,8 @@ public class Player : MonoBehaviour
 
         _playerMover = GetComponent<PlayerMover>();
         _projectileSpawner = GetComponent<ProjectileSpawner>();
+
+        _scoreCounter = GetComponent<ScoreCounter>();
     }
 
     private void OnEnable()
@@ -42,8 +46,8 @@ public class Player : MonoBehaviour
 
     public void ResetPlayer()
     {
-        transform.rotation = Quaternion.identity;
-        transform.position = Vector3.zero;
+        _playerMover.Reset();
+        _scoreCounter.ResetScore();
     }
 
     private void OnJump()
@@ -58,7 +62,6 @@ public class Player : MonoBehaviour
     
     private void OnCollision(IInteractable interactable)
     {
-        Debug.Log("Hit collidable object");
         HitObstacle?.Invoke();
     }
 }
