@@ -33,8 +33,8 @@ public class PlayerMover : MonoBehaviour
     {
         if(_isJumping)
             Jump();
-        
-        transform.rotation = Quaternion.Lerp(transform.rotation, _minRotation, _rotationSpeed * Time.deltaTime);
+        else
+            _rigidbody2D.MoveRotation(Quaternion.Lerp(transform.rotation, _minRotation, _rotationSpeed * Time.fixedDeltaTime));
     }
 
     public void TryJump()
@@ -45,15 +45,16 @@ public class PlayerMover : MonoBehaviour
 
     public void Reset()
     {
+        _rigidbody2D.velocity = Vector2.zero;
+     
         transform.position = _startPosition;
         transform.rotation = Quaternion.identity;
-        _rigidbody2D.velocity = Vector2.zero;
     }
 
     private void Jump()
     {
         _rigidbody2D.velocity = new Vector2(_speed, _tapForce);
-        transform.rotation = _maxRotation;
+        _rigidbody2D.MoveRotation(_maxRotation);
         
         _isJumping = false;
     }

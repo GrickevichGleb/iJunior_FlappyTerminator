@@ -7,14 +7,16 @@ using UnityEngine;
 public class Enemy : Spawnable
 {
     [SerializeField] private int _scoreValue = 5;
-    
+
     private CollisionHandler _collisionHandler;
+    private ProjectileSpawner _projectileSpawner;
 
     public event Action<int> Destroyed;
 
     private void Awake()
     {
         _collisionHandler = GetComponent<CollisionHandler>();
+        _projectileSpawner = GetComponent<ProjectileSpawner>();
     }
 
     private void OnEnable()
@@ -39,8 +41,15 @@ public class Enemy : Spawnable
         {
             Debug.Log("Shot down");
             Destroyed?.Invoke(_scoreValue);
+
             Release();
         }
+    }
+
+    protected override void Release()
+    {
+        _projectileSpawner.DestroyAllProjectiles();
+        base.Release();
     }
 
     public override void Reset()

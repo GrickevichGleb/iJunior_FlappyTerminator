@@ -10,14 +10,16 @@ public class EnemiesSpawner : Spawner
 
     private bool _isSpawning = true;
 
-    private void Start()
-    {
-        StartCoroutine(SpawnEnemiesCoroutine());
-    }
-
+    private Coroutine _spawnEnemiesCoroutine;
+    
     public void ResetSpawner()
     {
-        _pool.Clear();
+        DestroyAllObjects();
+        
+        if(_spawnEnemiesCoroutine != null)
+            StopCoroutine(_spawnEnemiesCoroutine);
+        
+        _spawnEnemiesCoroutine = StartCoroutine(SpawnEnemiesCoroutine());
     }
 
     protected override void ActionOnGet(Spawnable spawnable)

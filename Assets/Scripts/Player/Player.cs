@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
     public void ResetPlayer()
     {
         _playerMover.Reset();
+        _projectileSpawner.DestroyAllProjectiles();
         _scoreCounter.ResetScore();
     }
 

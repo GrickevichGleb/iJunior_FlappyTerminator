@@ -3,14 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[RequireComponent(typeof(Collider2D))]
 public class CollisionHandler : MonoBehaviour
 {
-    public event Action<IInteractable> Collision; 
+    public event Action<IInteractable> Collision;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.TryGetComponent(out IInteractable interactable))
+        Debug.Log("Detected collision");
+        
+        if (other.gameObject.TryGetComponent(out IInteractable interactable))
         {
             Collision?.Invoke(interactable);
         }

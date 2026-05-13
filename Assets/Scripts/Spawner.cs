@@ -14,6 +14,7 @@ public class Spawner : MonoBehaviour
     protected ObjectPool<Spawnable> _pool;
 
     public event Action<Spawnable> Spawned;
+    public event Action<Spawner> DestroyAllPoolObjects;
 
     private void Awake()
     {
@@ -21,7 +22,7 @@ public class Spawner : MonoBehaviour
             createFunc: () => Instantiate(spawnablePref),
             actionOnGet: (spawnable) => ActionOnGet(spawnable),
             actionOnRelease: (spawnable) => spawnable.gameObject.SetActive(false),
-            actionOnDestroy: (spawnable) => Destroy(spawnable.gameObject),
+            actionOnDestroy: (spawnable) => ActionOnDestroy(spawnable),
             collectionCheck: true,
             defaultCapacity: _poolCapacity,
             maxSize: _poolMaxSize);
@@ -30,14 +31,25 @@ public class Spawner : MonoBehaviour
     protected virtual void ActionOnGet(Spawnable spawnable)
     {
         spawnable.Reset();
+        spawnable.SubscribeRemoteDestroy(this);
         spawnable.RequestRelease += OnRequestRelease;
         
         Spawned?.Invoke(spawnable);
     }
+
+    protected virtual void ActionOnDestroy(Spawnable spawnable)
+    {
+        Destroy(spawnable.gameObject);
+    }
     
-    private void OnRequestRelease(Spawnable spawnable)
+    protected virtual void OnRequestRelease(Spawnable spawnable)
     {
         spawnable.RequestRelease -= OnRequestRelease;
         _pool.Release(spawnable);
+    }
+
+    protected virtual void DestroyAllObjects()
+    {
+        DestroyAllPoolObjects?.Invoke(this);
     }
 }
