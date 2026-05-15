@@ -39,6 +39,11 @@ public class Projectile : Spawnable, IInteractable
     {
         _transform.Translate(_fireDirection * (_speed * Time.deltaTime));
     }
+
+    public void SetDirection(Vector3 fireDirection)
+    {
+        _fireDirection = fireDirection;
+    }
     
     public override void Reset()
     {

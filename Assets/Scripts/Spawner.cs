@@ -8,24 +8,24 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] protected Spawnable spawnablePref;
     [Space] 
-    [SerializeField] protected int _poolCapacity = 10;
-    [SerializeField] protected int _poolMaxSize = 100;
+    [SerializeField] protected int poolCapacity = 10;
+    [SerializeField] protected int poolMaxSize = 100;
 
-    protected ObjectPool<Spawnable> _pool;
+    protected ObjectPool<Spawnable> pool;
 
     public event Action<Spawnable> Spawned;
     public event Action<Spawner> DestroyAllPoolObjects;
 
     private void Awake()
     {
-        _pool = new ObjectPool<Spawnable>(
+        pool = new ObjectPool<Spawnable>(
             createFunc: () => Instantiate(spawnablePref),
             actionOnGet: (spawnable) => ActionOnGet(spawnable),
             actionOnRelease: (spawnable) => spawnable.gameObject.SetActive(false),
             actionOnDestroy: (spawnable) => ActionOnDestroy(spawnable),
             collectionCheck: true,
-            defaultCapacity: _poolCapacity,
-            maxSize: _poolMaxSize);
+            defaultCapacity: poolCapacity,
+            maxSize: poolMaxSize);
     }
     
     protected virtual void ActionOnGet(Spawnable spawnable)
@@ -45,7 +45,7 @@ public class Spawner : MonoBehaviour
     protected virtual void OnRequestRelease(Spawnable spawnable)
     {
         spawnable.RequestRelease -= OnRequestRelease;
-        _pool.Release(spawnable);
+        pool.Release(spawnable);
     }
 
     protected virtual void DestroyAllObjects()

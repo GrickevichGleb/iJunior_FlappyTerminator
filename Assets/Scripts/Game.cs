@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class Game : MonoBehaviour
 {
     [SerializeField] private Player _player;
     [SerializeField] private EnemiesSpawner _enemiesSpawner;

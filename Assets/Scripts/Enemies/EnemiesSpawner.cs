@@ -27,6 +27,7 @@ public class EnemiesSpawner : Spawner
         base.ActionOnGet(spawnable);
 
         spawnable.transform.position = GetSpawnPosition();
+        spawnable.transform.right = Vector3.left;
     }
 
     private IEnumerator SpawnEnemiesCoroutine()
@@ -37,7 +38,7 @@ public class EnemiesSpawner : Spawner
         {
             yield return delay;
 
-            _pool.Get();
+            pool.Get();
         }
     }
 

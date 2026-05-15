@@ -1066,8 +1066,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnablePref: {fileID: 8722189993892021575, guid: 3b85f8a4405a64596ae2414ff171413c,
     type: 3}
-  _poolCapacity: 10
-  _poolMaxSize: 100
+  poolCapacity: 10
+  poolMaxSize: 100
   _interval: 0.2
   _firingPoint: {fileID: 1040914405}
   _autoFire: 0
@@ -1404,7 +1404,7 @@ GameObject:
   - component: {fileID: 883698511}
   - component: {fileID: 883698510}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2551,8 +2551,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnablePref: {fileID: 7120671444188241561, guid: 37bcdccb260d24cbd87075210ac4caad,
     type: 3}
-  _poolCapacity: 10
-  _poolMaxSize: 100
+  poolCapacity: 10
+  poolMaxSize: 100
   _interval: 3
   _spawnAreaMarker: {fileID: 1422685502}
 --- !u!1 &1874487437

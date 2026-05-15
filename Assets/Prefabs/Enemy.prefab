@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3927440931860639603}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.25, y: 0, z: 0}
+  m_LocalPosition: {x: 1.25, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -114,11 +114,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.27436522, y: -0.41529408}
-      - {x: 0.5460259, y: -0.55745643}
-      - {x: 0.5374077, y: 0.5490152}
-      - {x: -0.28157166, y: 0.41887128}
-      - {x: -0.93668085, y: 0.0071644783}
+    - - {x: -0.17711747, y: -0.55594087}
+      - {x: -0.683815, y: -0.546373}
+      - {x: -0.6819722, y: 0.53438485}
+      - {x: -0.22526097, y: 0.54300296}
+      - {x: 0.84016544, y: -0.008527935}
   m_UseDelaunayMesh: 0
 --- !u!50 &-8666858877080952185
 Rigidbody2D:
@@ -198,8 +198,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnablePref: {fileID: 8722189993892021575, guid: 2fad278416bc7420e95ff540d0f7c26c,
     type: 3}
-  _poolCapacity: 10
-  _poolMaxSize: 100
+  poolCapacity: 10
+  poolMaxSize: 100
   _interval: 1.2
   _firingPoint: {fileID: 2969962847696532516}
   _autoFire: 1
@@ -228,13 +228,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6935851643824855201}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6765143721092991489}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &5090659953773107300
 SpriteRenderer:
   m_ObjectHideFlags: 0

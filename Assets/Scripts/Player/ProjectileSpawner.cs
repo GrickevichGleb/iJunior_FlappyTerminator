@@ -31,7 +31,9 @@ public class ProjectileSpawner : Spawner
     {
         base.ActionOnGet(spawnable);
 
-        spawnable.transform.position = _firingPoint.position;
+        Projectile projectile = spawnable as Projectile;
+        projectile!.transform.position = _firingPoint.position;
+        projectile.SetDirection(_firingPoint.right);
     }
 
     public void DestroyAllProjectiles()
@@ -47,7 +49,7 @@ public class ProjectileSpawner : Spawner
 
     private void Fire()
     {
-        _pool.Get();
+        pool.Get();
 
         _lastShotTime = Time.time;
     }
@@ -60,7 +62,7 @@ public class ProjectileSpawner : Spawner
         {
             yield return delay;
 
-            _pool.Get();
+            pool.Get();
         }
     }
 }
